@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetag Ads Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .box {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        #counter {
+            background: #28a745;
+        }
+
+        #timer {
+            background: #007bff;
+        }
+
+        #adLink {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #fff;
+            background: #dc3545;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #adLink:hover {
+            background: #c82333;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #nextAdBtn {
+            background: #ffc107;
+            color: #000;
+        }
+
+        #nextAdBtn:disabled {
+            background: #d4d4d4;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📢 Watch Ads & Earn 💰</h2>
+        <div id="counter" class="box">Ads Watched: 0</div>
+        <div id="timer" class="box">Time Left: 60s</div>
+        <p>🔗 Click the button below to view the ad:</p>
+        <a id="adLink" href="#" target="_blank">▶ View Ad</a>
+        <br>
+        <button id="nextAdBtn" class="btn" onclick="nextAd()" disabled>➡ Next Ad</button>
+    </div>
+
+    <script>
+        const adLinks = [
+            "https://ptakeemsaifegro.net/4/9074939",
+            "https://ptakeemsaifegro.net/4/9074940",
+            "https://ptakeemsaifegro.net/4/9074941",
+            "https://ptakeemsaifegro.net/4/9074942",
+            "https://ptakeemsaifegro.net/4/9074943",
+            "https://ptakeemsaifegro.net/4/9074944",
+            "https://ptakeemsaifegro.net/4/9074945",
+            "https://ptakeemsaifegro.net/4/9074946",
+            "https://ptakeemsaifegro.net/4/9074947",
+            "https://ptakeemsaifegro.net/4/9074948",
+            "https://ptakeemsaifegro.net/4/9074938",
+            "https://ptakeemsaifegro.net/4/9074937",
+            "https://ptakeemsaifegro.net/4/9074936",
+            "https://ptakeemsaifegro.net/4/9074935",
+            "https://ptakeemsaifegro.net/4/9074934",
+            "https://ptakeemsaifegro.net/4/9074933",
+            "https://ptakeemsaifegro.net/4/9074932",
+            "https://ptakeemsaifegro.net/4/9074931",
+            "https://ptakeemsaifegro.net/4/9073203",
+            "https://ptakeemsaifegro.net/4/9073272"
+        ];
+        
+        let adCount = 0;
+        let timeLeft = 60;
+        let timer;
+
+        function loadAd() {
+            let randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
+            document.getElementById("adLink").href = randomAd;
+            document.getElementById("nextAdBtn").disabled = true;
+            timeLeft = 60;
+            document.getElementById("timer").innerText = "Time Left: " + timeLeft + "s";
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("timer").innerText = "Time Left: " + timeLeft + "s";
+            } else {
+                clearInterval(timer);
+                document.getElementById("nextAdBtn").disabled = false;
+                adCount++;
+                document.getElementById("counter").innerText = "Ads Watched: " + adCount;
+            }
+        }
+
+        function nextAd() {
+            clearInterval(timer);
+            loadAd();
+            window.open(document.getElementById("adLink").href, "_blank");
+        }
+
+        window.onload = loadAd;
+    </script>
+</body>
+</html>
